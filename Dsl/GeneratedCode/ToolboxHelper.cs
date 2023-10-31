@@ -98,7 +98,7 @@ namespace Company.Workshop8
 		{
 			get
 			{
-				return 9;
+				return 10;
 			}
 		}
 		
@@ -147,27 +147,11 @@ namespace Company.Workshop8
 			global::System.Globalization.CultureInfo resourceCulture = global::System.Globalization.CultureInfo.CurrentUICulture;
 			switch(itemId)
 			{
-				case "Company.Workshop8.ExampleElementToolboxItem":
-					// Add ExampleElement shape tool.
-					result = new DslDesign::ModelingToolboxItem(
-						"Company.Workshop8.ExampleElementToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						1, // Position relative to other items in the same toolbox tab.
-						resourceManager.GetString("ExampleElementToolboxItem", resourceCulture), // Localized display name for the item.
-						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("ExampleElementToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
-						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
-						resourceManager.GetString("Workshop8ToolboxTab", resourceCulture), // Localized display name for the toolbox tab.
-						"CreateExampleClassF1Keyword", // F1 help keyword for the toolbox item.
-						resourceManager.GetString("ExampleElementToolboxTooltip", resourceCulture), // Localized tooltip text for the toolbox item.
-						CreateElementToolPrototype(store, global::Company.Workshop8.ImpactLevel.DomainClassId), // ElementGroupPrototype (data object) representing model element on the toolbox.
-						new global::System.ComponentModel.ToolboxItemFilterAttribute[] { // Collection of ToolboxItemFilterAttribute objects that determine visibility of the toolbox item.
-						new global::System.ComponentModel.ToolboxItemFilterAttribute(ToolboxFilterString, global::System.ComponentModel.ToolboxItemFilterType.Require) 
-						});
-					break;
 				case "Company.Workshop8.StructuralToolboxItem":
 					// Add Structural shape tool.
 					result = new DslDesign::ModelingToolboxItem(
 						"Company.Workshop8.StructuralToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						2, // Position relative to other items in the same toolbox tab.
+						1, // Position relative to other items in the same toolbox tab.
 						resourceManager.GetString("StructuralToolboxItem", resourceCulture), // Localized display name for the item.
 						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("StructuralToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
 						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
@@ -183,7 +167,7 @@ namespace Company.Workshop8
 					// Add Enabling shape tool.
 					result = new DslDesign::ModelingToolboxItem(
 						"Company.Workshop8.EnablingToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						3, // Position relative to other items in the same toolbox tab.
+						2, // Position relative to other items in the same toolbox tab.
 						resourceManager.GetString("EnablingToolboxItem", resourceCulture), // Localized display name for the item.
 						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("EnablingToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
 						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
@@ -199,7 +183,7 @@ namespace Company.Workshop8
 					// Add Immediate shape tool.
 					result = new DslDesign::ModelingToolboxItem(
 						"Company.Workshop8.ImmediateToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						4, // Position relative to other items in the same toolbox tab.
+						3, // Position relative to other items in the same toolbox tab.
 						resourceManager.GetString("ImmediateToolboxItem", resourceCulture), // Localized display name for the item.
 						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("ImmediateToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
 						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
@@ -215,7 +199,7 @@ namespace Company.Workshop8
 					// Add EconomicConcern shape tool.
 					result = new DslDesign::ModelingToolboxItem(
 						"Company.Workshop8.EconomicConcernToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						5, // Position relative to other items in the same toolbox tab.
+						4, // Position relative to other items in the same toolbox tab.
 						resourceManager.GetString("EconomicConcernToolboxItem", resourceCulture), // Localized display name for the item.
 						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("EconomicConcernToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
 						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
@@ -231,7 +215,7 @@ namespace Company.Workshop8
 					// Add SocialConcern shape tool.
 					result = new DslDesign::ModelingToolboxItem(
 						"Company.Workshop8.SocialConcernToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						6, // Position relative to other items in the same toolbox tab.
+						5, // Position relative to other items in the same toolbox tab.
 						resourceManager.GetString("SocialConcernToolboxItem", resourceCulture), // Localized display name for the item.
 						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("SocialConcernToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
 						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
@@ -247,7 +231,7 @@ namespace Company.Workshop8
 					// Add EnvironmentalConcern shape tool.
 					result = new DslDesign::ModelingToolboxItem(
 						"Company.Workshop8.EnvironmentalConcernToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						7, // Position relative to other items in the same toolbox tab.
+						6, // Position relative to other items in the same toolbox tab.
 						resourceManager.GetString("EnvironmentalConcernToolboxItem", resourceCulture), // Localized display name for the item.
 						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("EnvironmentalConcernToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
 						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
@@ -263,7 +247,7 @@ namespace Company.Workshop8
 					// Add TechnicalConcern shape tool.
 					result = new DslDesign::ModelingToolboxItem(
 						"Company.Workshop8.TechnicalConcernToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						8, // Position relative to other items in the same toolbox tab.
+						7, // Position relative to other items in the same toolbox tab.
 						resourceManager.GetString("TechnicalConcernToolboxItem", resourceCulture), // Localized display name for the item.
 						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("TechnicalConcernToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
 						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
@@ -280,7 +264,7 @@ namespace Company.Workshop8
 					// Add Relationship connector tool.
 					result = new DslDesign::ModelingToolboxItem(
 						"Company.Workshop8.RelationshipToolboxItem", // Unique identifier (non-localized) for the toolbox item.
-						9, // Position relative to other items in the same toolbox tab.
+						8, // Position relative to other items in the same toolbox tab.
 						resourceManager.GetString("RelationshipToolboxItem", resourceCulture), // Localized display name for the item.
 						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("RelationshipToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.				
 						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
@@ -291,6 +275,38 @@ namespace Company.Workshop8
 						new global::System.ComponentModel.ToolboxItemFilterAttribute[] { // Collection of ToolboxItemFilterAttribute objects that determine visibility of the toolbox item.
 							new global::System.ComponentModel.ToolboxItemFilterAttribute(ToolboxFilterString, global::System.ComponentModel.ToolboxItemFilterType.Require), 
 							new global::System.ComponentModel.ToolboxItemFilterAttribute(RelationshipFilterString)
+						});
+					break;
+				case "Company.Workshop8.LegendToolboxItem":
+					// Add Legend shape tool.
+					result = new DslDesign::ModelingToolboxItem(
+						"Company.Workshop8.LegendToolboxItem", // Unique identifier (non-localized) for the toolbox item.
+						9, // Position relative to other items in the same toolbox tab.
+						resourceManager.GetString("LegendToolboxItem", resourceCulture), // Localized display name for the item.
+						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("LegendToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
+						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
+						resourceManager.GetString("Workshop8ToolboxTab", resourceCulture), // Localized display name for the toolbox tab.
+						"Legend", // F1 help keyword for the toolbox item.
+						resourceManager.GetString("LegendToolboxTooltip", resourceCulture), // Localized tooltip text for the toolbox item.
+						CreateElementToolPrototype(store, global::Company.Workshop8.Legend.DomainClassId), // ElementGroupPrototype (data object) representing model element on the toolbox.
+						new global::System.ComponentModel.ToolboxItemFilterAttribute[] { // Collection of ToolboxItemFilterAttribute objects that determine visibility of the toolbox item.
+						new global::System.ComponentModel.ToolboxItemFilterAttribute(ToolboxFilterString, global::System.ComponentModel.ToolboxItemFilterType.Require) 
+						});
+					break;
+				case "Company.Workshop8.SoftwareArchitectureToolboxItem":
+					// Add SoftwareArchitecture shape tool.
+					result = new DslDesign::ModelingToolboxItem(
+						"Company.Workshop8.SoftwareArchitectureToolboxItem", // Unique identifier (non-localized) for the toolbox item.
+						10, // Position relative to other items in the same toolbox tab.
+						resourceManager.GetString("SoftwareArchitectureToolboxItem", resourceCulture), // Localized display name for the item.
+						(global::System.Drawing.Bitmap)DslDiagrams::ImageHelper.GetImage(resourceManager.GetObject("SoftwareArchitectureToolboxBitmap", resourceCulture)), // Image displayed next to the toolbox item.
+						"Company.Workshop8.Workshop8ToolboxTab", // Unique identifier (non-localized) for the toolbox item tab.
+						resourceManager.GetString("Workshop8ToolboxTab", resourceCulture), // Localized display name for the toolbox tab.
+						"SoftwareArchitecture", // F1 help keyword for the toolbox item.
+						resourceManager.GetString("SoftwareArchitectureToolboxTooltip", resourceCulture), // Localized tooltip text for the toolbox item.
+						CreateElementToolPrototype(store, global::Company.Workshop8.SoftwareSolution.DomainClassId), // ElementGroupPrototype (data object) representing model element on the toolbox.
+						new global::System.ComponentModel.ToolboxItemFilterAttribute[] { // Collection of ToolboxItemFilterAttribute objects that determine visibility of the toolbox item.
+						new global::System.ComponentModel.ToolboxItemFilterAttribute(ToolboxFilterString, global::System.ComponentModel.ToolboxItemFilterType.Require) 
 						});
 					break;
 				default:

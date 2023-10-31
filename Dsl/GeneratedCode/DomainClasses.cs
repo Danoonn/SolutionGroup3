@@ -62,6 +62,22 @@ namespace Company.Workshop8
 			}
 		}
 		#endregion
+		#region Legend opposite domain role accessor
+		
+		/// <summary>
+		/// Gets a list of Legend.
+		/// Description for
+		/// Company.Workshop8.SoftwareArchitectureHasLegend.SoftwareArchitecture
+		/// </summary>
+		public virtual DslModeling::LinkedElementCollection<Legend> Legend
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get
+			{
+				return GetRoleCollection<DslModeling::LinkedElementCollection<Legend>, Legend>(global::Company.Workshop8.SoftwareArchitectureHasLegend.SoftwareArchitectureDomainRoleId);
+			}
+		}
+		#endregion
 		#region ElementGroupPrototype Merge methods
 		/// <summary>
 		/// Returns a value indicating whether the source element represented by the
@@ -83,6 +99,11 @@ namespace Company.Workshop8
 				DslModeling::DomainClassInfo rootElementDomainInfo = this.Partition.DomainDataDirectory.GetDomainClass(rootElement.DomainClassId);
 				
 				if (rootElementDomainInfo.IsDerivedFrom(global::Company.Workshop8.ImpactLevel.DomainClassId)) 
+				{
+					return true;
+				}
+				
+				if (rootElementDomainInfo.IsDerivedFrom(global::Company.Workshop8.Legend.DomainClassId)) 
 				{
 					return true;
 				}
@@ -119,6 +140,15 @@ namespace Company.Workshop8
 
 				return;
 			}
+				
+			global::Company.Workshop8.Legend sourceLegend2 = sourceElement as global::Company.Workshop8.Legend;
+			if (sourceLegend2 != null)
+			{
+				// Create link for path SoftwareArchitectureHasLegend.Legend
+				this.Legend.Add(sourceLegend2);
+
+				return;
+			}
 		
 			// Sdk workaround to runtime bug #879350 (DSL: can't copy and paste a MEL that has a MEX). Avoid MergeRelate on ModelElementExtension
 			// during a "Paste".
@@ -151,6 +181,20 @@ namespace Company.Workshop8
 				{
 					// Delete the link, but without possible delete propagation to the element since it's moving to a new location.
 					link.Delete(global::Company.Workshop8.SoftwareArchitectureHasElements.SoftwareArchitectureDomainRoleId, global::Company.Workshop8.SoftwareArchitectureHasElements.ElementDomainRoleId);
+				}
+
+				return;
+			}
+				
+			global::Company.Workshop8.Legend sourceLegend2 = sourceElement as global::Company.Workshop8.Legend;
+			if (sourceLegend2 != null)
+			{
+				// Delete link for path SoftwareArchitectureHasLegend.Legend
+				
+				foreach (DslModeling::ElementLink link in global::Company.Workshop8.SoftwareArchitectureHasLegend.GetLinks((global::Company.Workshop8.SoftwareArchitecture)this, sourceLegend2))
+				{
+					// Delete the link, but without possible delete propagation to the element since it's moving to a new location.
+					link.Delete(global::Company.Workshop8.SoftwareArchitectureHasLegend.SoftwareArchitectureDomainRoleId, global::Company.Workshop8.SoftwareArchitectureHasLegend.LegendDomainRoleId);
 				}
 
 				return;
@@ -1032,7 +1076,7 @@ namespace Company.Workshop8
 		/// <summary>
 		/// Storage for EcoName
 		/// </summary>
-		private global::System.String ecoNamePropertyStorage = string.Empty;
+		private global::System.String ecoNamePropertyStorage = "Input concern";
 		
 		/// <summary>
 		/// Gets or sets the value of EcoName domain property.
@@ -1040,6 +1084,7 @@ namespace Company.Workshop8
 		/// </summary>
 		[DslDesign::DisplayNameResource("Company.Workshop8.EconomicConcern/EcoName.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
 		[DslDesign::DescriptionResource("Company.Workshop8.EconomicConcern/EcoName.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[global::System.ComponentModel.DefaultValue("Input concern")]
 		[DslModeling::DomainObjectId("fb0e5fc3-df2a-4d52-9b81-c9ddb0ce0c23")]
 		public global::System.String EcoName
 		{
@@ -1160,7 +1205,7 @@ namespace Company.Workshop8
 		/// <summary>
 		/// Storage for SocialName
 		/// </summary>
-		private global::System.String socialNamePropertyStorage = string.Empty;
+		private global::System.String socialNamePropertyStorage = "Input concern";
 		
 		/// <summary>
 		/// Gets or sets the value of SocialName domain property.
@@ -1168,6 +1213,7 @@ namespace Company.Workshop8
 		/// </summary>
 		[DslDesign::DisplayNameResource("Company.Workshop8.SocialConcern/SocialName.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
 		[DslDesign::DescriptionResource("Company.Workshop8.SocialConcern/SocialName.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[global::System.ComponentModel.DefaultValue("Input concern")]
 		[DslModeling::DomainObjectId("95e83b9b-3dc7-429c-b6ae-0c7fefd2b550")]
 		public global::System.String SocialName
 		{
@@ -1416,7 +1462,7 @@ namespace Company.Workshop8
 		/// <summary>
 		/// Storage for TechName
 		/// </summary>
-		private global::System.String techNamePropertyStorage = string.Empty;
+		private global::System.String techNamePropertyStorage = "Input concern";
 		
 		/// <summary>
 		/// Gets or sets the value of TechName domain property.
@@ -1424,6 +1470,7 @@ namespace Company.Workshop8
 		/// </summary>
 		[DslDesign::DisplayNameResource("Company.Workshop8.TechnicalConcern/TechName.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
 		[DslDesign::DescriptionResource("Company.Workshop8.TechnicalConcern/TechName.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[global::System.ComponentModel.DefaultValue("Input concern")]
 		[DslModeling::DomainObjectId("26b77377-b8f5-4ea9-958f-ef669dbdf1cc")]
 		public global::System.String TechName
 		{
@@ -1492,6 +1539,195 @@ namespace Company.Workshop8
 			}
 		}
 		
+		#endregion
+	}
+}
+namespace Company.Workshop8
+{
+	/// <summary>
+	/// DomainClass SoftwareSolution
+	/// Description for Company.Workshop8.SoftwareSolution
+	/// </summary>
+	[DslDesign::DisplayNameResource("Company.Workshop8.SoftwareSolution.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+	[DslDesign::DescriptionResource("Company.Workshop8.SoftwareSolution.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+	[DslModeling::DomainModelOwner(typeof(global::Company.Workshop8.Workshop8DomainModel))]
+	[global::System.CLSCompliant(true)]
+	[DslModeling::DomainObjectId("4276f16f-fae9-44ce-a94d-e31302bb3dff")]
+	public partial class SoftwareSolution : Concern
+	{
+		#region Constructors, domain class Id
+	
+		/// <summary>
+		/// SoftwareSolution domain class Id.
+		/// </summary>
+		public static readonly new global::System.Guid DomainClassId = new global::System.Guid(0x4276f16f, 0xfae9, 0x44ce, 0xa9, 0x4d, 0xe3, 0x13, 0x02, 0xbb, 0x3d, 0xff);
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="store">Store where new element is to be created.</param>
+		/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+		public SoftwareSolution(DslModeling::Store store, params DslModeling::PropertyAssignment[] propertyAssignments)
+			: this(store != null ? store.DefaultPartitionForClass(DomainClassId) : null, propertyAssignments)
+		{
+		}
+		
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="partition">Partition where new element is to be created.</param>
+		/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+		public SoftwareSolution(DslModeling::Partition partition, params DslModeling::PropertyAssignment[] propertyAssignments)
+			: base(partition, propertyAssignments)
+		{
+		}
+		#endregion
+		#region SoSolutionName domain property code
+		
+		/// <summary>
+		/// SoSolutionName domain property Id.
+		/// </summary>
+		public static readonly global::System.Guid SoSolutionNameDomainPropertyId = new global::System.Guid(0x088088f8, 0x26ea, 0x4f55, 0x9d, 0x3f, 0x94, 0x86, 0xba, 0x02, 0xfe, 0xfb);
+		
+		/// <summary>
+		/// Storage for SoSolutionName
+		/// </summary>
+		private global::System.String soSolutionNamePropertyStorage = string.Empty;
+		
+		/// <summary>
+		/// Gets or sets the value of SoSolutionName domain property.
+		/// Description for Company.Workshop8.SoftwareSolution.So Solution Name
+		/// </summary>
+		[DslDesign::DisplayNameResource("Company.Workshop8.SoftwareSolution/SoSolutionName.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[DslDesign::DescriptionResource("Company.Workshop8.SoftwareSolution/SoSolutionName.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[global::System.ComponentModel.DefaultValue("")]
+		[DslModeling::DomainObjectId("088088f8-26ea-4f55-9d3f-9486ba02fefb")]
+		public global::System.String SoSolutionName
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get
+			{
+				return soSolutionNamePropertyStorage;
+			}
+			[global::System.Diagnostics.DebuggerStepThrough]
+			set
+			{
+				SoSolutionNamePropertyHandler.Instance.SetValue(this, value);
+			}
+		}
+		/// <summary>
+		/// Value handler for the SoftwareSolution.SoSolutionName domain property.
+		/// </summary>
+		internal sealed partial class SoSolutionNamePropertyHandler : DslModeling::DomainPropertyValueHandler<SoftwareSolution, global::System.String>
+		{
+			private SoSolutionNamePropertyHandler() { }
+		
+			/// <summary>
+			/// Gets the singleton instance of the SoftwareSolution.SoSolutionName domain property value handler.
+			/// </summary>
+			public static readonly SoSolutionNamePropertyHandler Instance = new SoSolutionNamePropertyHandler();
+		
+			/// <summary>
+			/// Gets the Id of the SoftwareSolution.SoSolutionName domain property.
+			/// </summary>
+			public sealed override global::System.Guid DomainPropertyId
+			{
+				[global::System.Diagnostics.DebuggerStepThrough]
+				get
+				{
+					return SoSolutionNameDomainPropertyId;
+				}
+			}
+			
+			/// <summary>
+			/// Gets a strongly-typed value of the property on specified element.
+			/// </summary>
+			/// <param name="element">Element which owns the property.</param>
+			/// <returns>Property value.</returns>
+			public override sealed global::System.String GetValue(SoftwareSolution element)
+			{
+				if (element == null) throw new global::System.ArgumentNullException("element");
+				return element.soSolutionNamePropertyStorage;
+			}
+		
+			/// <summary>
+			/// Sets property value on an element.
+			/// </summary>
+			/// <param name="element">Element which owns the property.</param>
+			/// <param name="newValue">New property value.</param>
+			public override sealed void SetValue(SoftwareSolution element, global::System.String newValue)
+			{
+				if (element == null) throw new global::System.ArgumentNullException("element");
+		
+				global::System.String oldValue = GetValue(element);
+				if (newValue != oldValue)
+				{
+					ValueChanging(element, oldValue, newValue);
+					element.soSolutionNamePropertyStorage = newValue;
+					ValueChanged(element, oldValue, newValue);
+				}
+			}
+		}
+		
+		#endregion
+	}
+}
+namespace Company.Workshop8
+{
+	/// <summary>
+	/// DomainClass Legend
+	/// Description for Company.Workshop8.Legend
+	/// </summary>
+	[DslDesign::DisplayNameResource("Company.Workshop8.Legend.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+	[DslDesign::DescriptionResource("Company.Workshop8.Legend.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+	[DslModeling::DomainModelOwner(typeof(global::Company.Workshop8.Workshop8DomainModel))]
+	[global::System.CLSCompliant(true)]
+	[DslModeling::DomainObjectId("d104c168-2650-4084-a132-eba1a4fd6ac4")]
+	public partial class Legend : DslModeling::ModelElement
+	{
+		#region Constructors, domain class Id
+	
+		/// <summary>
+		/// Legend domain class Id.
+		/// </summary>
+		public static readonly new global::System.Guid DomainClassId = new global::System.Guid(0xd104c168, 0x2650, 0x4084, 0xa1, 0x32, 0xeb, 0xa1, 0xa4, 0xfd, 0x6a, 0xc4);
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="store">Store where new element is to be created.</param>
+		/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+		public Legend(DslModeling::Store store, params DslModeling::PropertyAssignment[] propertyAssignments)
+			: this(store != null ? store.DefaultPartitionForClass(DomainClassId) : null, propertyAssignments)
+		{
+		}
+		
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="partition">Partition where new element is to be created.</param>
+		/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+		public Legend(DslModeling::Partition partition, params DslModeling::PropertyAssignment[] propertyAssignments)
+			: base(partition, propertyAssignments)
+		{
+		}
+		#endregion
+		#region SoftwareArchitecture opposite domain role accessor
+		/// <summary>
+		/// Gets or sets SoftwareArchitecture.
+		/// Description for Company.Workshop8.SoftwareArchitectureHasLegend.Legend
+		/// </summary>
+		public virtual SoftwareArchitecture SoftwareArchitecture
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get
+			{
+				return DslModeling::DomainRoleInfo.GetLinkedElement(this, global::Company.Workshop8.SoftwareArchitectureHasLegend.LegendDomainRoleId) as SoftwareArchitecture;
+			}
+			[global::System.Diagnostics.DebuggerStepThrough]
+			set
+			{
+				DslModeling::DomainRoleInfo.SetLinkedElement(this, global::Company.Workshop8.SoftwareArchitectureHasLegend.LegendDomainRoleId, value);
+			}
+		}
 		#endregion
 	}
 }

@@ -98,6 +98,91 @@ namespace Company.Workshop8
 			return true;
 		}
 		
+		/// <summary>
+		/// Called during view fixup to configure the given child element, after it has been created.
+		/// </summary>
+		/// <remarks>
+		/// Custom code for choosing the shapes attached to either end of a connector is called from here.
+		/// </remarks>
+		protected override void OnChildConfiguring(DslDiagrams::ShapeElement child, bool createdDuringViewFixup)
+		{
+			DslDiagrams::NodeShape sourceShape;
+			DslDiagrams::NodeShape targetShape;
+			DslDiagrams::BinaryLinkShape connector = child as DslDiagrams::BinaryLinkShape;
+			if(connector == null)
+			{
+				base.OnChildConfiguring(child, createdDuringViewFixup);
+				return;
+			}
+			this.GetSourceAndTargetForConnector(connector, out sourceShape, out targetShape);
+			
+			global::System.Diagnostics.Debug.Assert(sourceShape != null && targetShape != null, "Unable to find source and target shapes for connector.");
+			connector.Connect(sourceShape, targetShape);
+		}
+		
+		/// <summary>
+		/// helper method to find the shapes for either end of a connector, including calling the user's custom code
+		/// </summary>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+		internal void GetSourceAndTargetForConnector(DslDiagrams::BinaryLinkShape connector, out DslDiagrams::NodeShape sourceShape, out DslDiagrams::NodeShape targetShape)
+		{
+			sourceShape = null;
+			targetShape = null;
+			
+			if (sourceShape == null || targetShape == null)
+			{
+				DslDiagrams::NodeShape[] endShapes = GetEndShapesForConnector(connector);
+				if(sourceShape == null)
+				{
+					sourceShape = endShapes[0];
+				}
+				if(targetShape == null)
+				{
+					targetShape = endShapes[1];
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Helper method to find shapes for either end of a connector by looking for shapes associated with either end of the relationship mapped to the connector.
+		/// </summary>
+		private DslDiagrams::NodeShape[] GetEndShapesForConnector(DslDiagrams::BinaryLinkShape connector)
+		{
+			DslModeling::ElementLink link = connector.ModelElement as DslModeling::ElementLink;
+			DslDiagrams::NodeShape sourceShape = null, targetShape = null;
+			if (link != null)
+			{
+				global::System.Collections.ObjectModel.ReadOnlyCollection<DslModeling::ModelElement> linkedElements = link.LinkedElements;
+				if (linkedElements.Count == 2)
+				{
+					DslDiagrams::Diagram currentDiagram = this.Diagram;
+					DslModeling::LinkedElementCollection<DslDiagrams::PresentationElement> presentationElements = DslDiagrams::PresentationViewsSubject.GetPresentation(linkedElements[0]);
+					foreach (DslDiagrams::PresentationElement presentationElement in presentationElements)
+					{
+						DslDiagrams::NodeShape shape = presentationElement as DslDiagrams::NodeShape;
+						if (shape != null && shape.Diagram == currentDiagram)
+						{
+							sourceShape = shape;
+							break;
+						}
+					}
+					
+					presentationElements = DslDiagrams::PresentationViewsSubject.GetPresentation(linkedElements[1]);
+					foreach (DslDiagrams::PresentationElement presentationElement in presentationElements)
+					{
+						DslDiagrams::NodeShape shape = presentationElement as DslDiagrams::NodeShape;
+						if (shape != null && shape.Diagram == currentDiagram)
+						{
+							targetShape = shape;
+							break;
+						}
+					}
+		
+				}
+			}
+			
+			return new DslDiagrams::NodeShape[] { sourceShape, targetShape };
+		}
 		
 		/// <summary>
 		/// Most connectors are mapped to element links, but there can be exceptions. This method tell if a connector should be
@@ -110,8 +195,6 @@ namespace Company.Workshop8
 			if (connector == null)
 				throw new global::System.ArgumentNullException("connector");
 			#endregion
-			if (connector.GetType() == typeof(global::Company.Workshop8.ExampleConnector))
-				return false;
 			if (connector.GetType() == typeof(global::Company.Workshop8.Relationship))
 				return false;
 			return base.IsConnectorMappedToLink(connector);
@@ -166,10 +249,33 @@ namespace Company.Workshop8
 				if(newShape != null) newShape.Size = newShape.DefaultSize; // set default shape size
 				return newShape;
 			}
+			if(element is global::Company.Workshop8.SoftwareSolution)
+			{
+				global::Company.Workshop8.SoftwareSolutionShape newShape = new global::Company.Workshop8.SoftwareSolutionShape(this.Partition);
+				if(newShape != null) newShape.Size = newShape.DefaultSize; // set default shape size
+				return newShape;
+			}
 			if(element is global::Company.Workshop8.ImpactLevel)
 			{
 				global::Company.Workshop8.ExampleShape newShape = new global::Company.Workshop8.ExampleShape(this.Partition);
 				if(newShape != null) newShape.Size = newShape.DefaultSize; // set default shape size
+				return newShape;
+			}
+			if(element is global::Company.Workshop8.Concern)
+			{
+				global::Company.Workshop8.ConcernShape newShape = new global::Company.Workshop8.ConcernShape(this.Partition);
+				if(newShape != null) newShape.Size = newShape.DefaultSize; // set default shape size
+				return newShape;
+			}
+			if(element is global::Company.Workshop8.Legend)
+			{
+				global::Company.Workshop8.LegendShape newShape = new global::Company.Workshop8.LegendShape(this.Partition);
+				if(newShape != null) newShape.Size = newShape.DefaultSize; // set default shape size
+				return newShape;
+			}
+			if(element is global::Company.Workshop8.ConcernReferencesTargetConcern)
+			{
+				global::Company.Workshop8.RelationshipShape newShape = new global::Company.Workshop8.RelationshipShape(this.Partition);
 				return newShape;
 			}
 			return base.CreateChildShape(element);
@@ -188,6 +294,8 @@ namespace Company.Workshop8
 			global::Company.Workshop8.SocialConcernShape.DecoratorsInitialized += SocialConcernShapeDecoratorMap.OnDecoratorsInitialized;
 			global::Company.Workshop8.EnvironmentalConcernShape.DecoratorsInitialized += EnvironmentalConcernShapeDecoratorMap.OnDecoratorsInitialized;
 			global::Company.Workshop8.TechnicalConcernShape.DecoratorsInitialized += TechnicalConcernShapeDecoratorMap.OnDecoratorsInitialized;
+			global::Company.Workshop8.SoftwareSolutionShape.DecoratorsInitialized += SoftwareSolutionShapeDecoratorMap.OnDecoratorsInitialized;
+			global::Company.Workshop8.RelationshipShape.DecoratorsInitialized += RelationshipShapeDecoratorMap.OnDecoratorsInitialized;
 		}
 		
 		/// <summary>
@@ -277,6 +385,42 @@ namespace Company.Workshop8
 				
 				propertyInfo = new DslDiagrams::AssociatedPropertyInfo(global::Company.Workshop8.TechnicalConcern.TechNameDomainPropertyId);
 				DslDiagrams::ShapeElement.FindDecorator(shape.Decorators, "TechnicalShapeName").AssociateValueWith(shape.Store, propertyInfo);
+			}
+		}
+		
+		/// <summary>
+		/// Class containing decorator path traversal methods for SoftwareSolutionShape.
+		/// </summary>
+		internal static partial class SoftwareSolutionShapeDecoratorMap
+		{
+			/// <summary>
+			/// Event handler called when decorator initialization is complete for SoftwareSolutionShape.  Adds decorator mappings for this shape or connector.
+			/// </summary>
+			public static void OnDecoratorsInitialized(object sender, global::System.EventArgs e)
+			{
+				DslDiagrams::ShapeElement shape = (DslDiagrams::ShapeElement)sender;
+				DslDiagrams::AssociatedPropertyInfo propertyInfo;
+				
+				propertyInfo = new DslDiagrams::AssociatedPropertyInfo(global::Company.Workshop8.SoftwareSolution.SoSolutionNameDomainPropertyId);
+				DslDiagrams::ShapeElement.FindDecorator(shape.Decorators, "SoSolutionShapeName").AssociateValueWith(shape.Store, propertyInfo);
+			}
+		}
+		
+		/// <summary>
+		/// Class containing decorator path traversal methods for RelationshipShape.
+		/// </summary>
+		internal static partial class RelationshipShapeDecoratorMap
+		{
+			/// <summary>
+			/// Event handler called when decorator initialization is complete for RelationshipShape.  Adds decorator mappings for this shape or connector.
+			/// </summary>
+			public static void OnDecoratorsInitialized(object sender, global::System.EventArgs e)
+			{
+				DslDiagrams::ShapeElement shape = (DslDiagrams::ShapeElement)sender;
+				DslDiagrams::AssociatedPropertyInfo propertyInfo;
+				
+				propertyInfo = new DslDiagrams::AssociatedPropertyInfo(global::Company.Workshop8.ConcernReferencesTargetConcern.SignDomainPropertyId);
+				DslDiagrams::ShapeElement.FindDecorator(shape.Decorators, "SignShape").AssociateValueWith(shape.Store, propertyInfo);
 			}
 		}
 		
@@ -438,7 +582,11 @@ namespace Company.Workshop8
 		[DslModeling::RuleOn(typeof(global::Company.Workshop8.SocialConcern), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddShapeParentExistRulePriority, InitiallyDisabled=true)]
 		[DslModeling::RuleOn(typeof(global::Company.Workshop8.EnvironmentalConcern), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddShapeParentExistRulePriority, InitiallyDisabled=true)]
 		[DslModeling::RuleOn(typeof(global::Company.Workshop8.TechnicalConcern), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddShapeParentExistRulePriority, InitiallyDisabled=true)]
+		[DslModeling::RuleOn(typeof(global::Company.Workshop8.SoftwareSolution), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddShapeParentExistRulePriority, InitiallyDisabled=true)]
 		[DslModeling::RuleOn(typeof(global::Company.Workshop8.ImpactLevel), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddShapeParentExistRulePriority, InitiallyDisabled=true)]
+		[DslModeling::RuleOn(typeof(global::Company.Workshop8.Concern), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddShapeParentExistRulePriority, InitiallyDisabled=true)]
+		[DslModeling::RuleOn(typeof(global::Company.Workshop8.Legend), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddShapeParentExistRulePriority, InitiallyDisabled=true)]
+		[DslModeling::RuleOn(typeof(global::Company.Workshop8.ConcernReferencesTargetConcern), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddConnectionRulePriority, InitiallyDisabled=true)]
 		internal sealed partial class FixUpDiagram : FixUpDiagramBase
 		{
 			[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
@@ -450,6 +598,10 @@ namespace Company.Workshop8
 				if (this.SkipFixup(childElement))
 					return;
 				DslModeling::ModelElement parentElement;
+				if(childElement is DslModeling::ElementLink)
+				{
+					parentElement = GetParentForRelationship((DslModeling::ElementLink)childElement);
+				} else
 				if(childElement is global::Company.Workshop8.Structural)
 				{
 					parentElement = GetParentForStructural((global::Company.Workshop8.Structural)childElement);
@@ -478,9 +630,21 @@ namespace Company.Workshop8
 				{
 					parentElement = GetParentForTechnicalConcern((global::Company.Workshop8.TechnicalConcern)childElement);
 				} else
+				if(childElement is global::Company.Workshop8.SoftwareSolution)
+				{
+					parentElement = GetParentForSoftwareSolution((global::Company.Workshop8.SoftwareSolution)childElement);
+				} else
 				if(childElement is global::Company.Workshop8.ImpactLevel)
 				{
 					parentElement = GetParentForImpactLevel((global::Company.Workshop8.ImpactLevel)childElement);
+				} else
+				if(childElement is global::Company.Workshop8.Concern)
+				{
+					parentElement = GetParentForConcern((global::Company.Workshop8.Concern)childElement);
+				} else
+				if(childElement is global::Company.Workshop8.Legend)
+				{
+					parentElement = GetParentForLegend((global::Company.Workshop8.Legend)childElement);
 				} else
 				{
 					parentElement = null;
@@ -559,7 +723,195 @@ namespace Company.Workshop8
 				if ( result == null ) return null;
 				return result;
 			}
+			public static global::Company.Workshop8.SoftwareArchitecture GetParentForConcern( global::Company.Workshop8.Concern root )
+			{
+				// Segments 0 and 1
+				global::Company.Workshop8.ImpactLevel root2 = root.ImpactLevel;
+				if ( root2 == null ) return null;
+				// Segments 2 and 3
+				global::Company.Workshop8.SoftwareArchitecture result = root2.SoftwareArchitecture;
+				if ( result == null ) return null;
+				return result;
+			}
+			public static global::Company.Workshop8.SoftwareArchitecture GetParentForLegend( global::Company.Workshop8.Legend root )
+			{
+				// Segments 0 and 1
+				global::Company.Workshop8.SoftwareArchitecture result = root.SoftwareArchitecture;
+				if ( result == null ) return null;
+				return result;
+			}
+			public static global::Company.Workshop8.SoftwareArchitecture GetParentForSoftwareSolution( global::Company.Workshop8.Concern root )
+			{
+				// Segments 0 and 1
+				global::Company.Workshop8.ImpactLevel root2 = root.ImpactLevel;
+				if ( root2 == null ) return null;
+				// Segments 2 and 3
+				global::Company.Workshop8.SoftwareArchitecture result = root2.SoftwareArchitecture;
+				if ( result == null ) return null;
+				return result;
+			}
+			private static DslModeling::ModelElement GetParentForRelationship(DslModeling::ElementLink elementLink)
+			{
+				global::System.Collections.ObjectModel.ReadOnlyCollection<DslModeling::ModelElement> linkedElements = elementLink.LinkedElements;
+	
+				if (linkedElements.Count == 2)
+				{
+					DslDiagrams::ShapeElement sourceShape = linkedElements[0] as DslDiagrams::ShapeElement;
+					DslDiagrams::ShapeElement targetShape = linkedElements[1] as DslDiagrams::ShapeElement;
+	
+					if(sourceShape == null)
+					{
+						DslModeling::LinkedElementCollection<DslDiagrams::PresentationElement> presentationElements = DslDiagrams::PresentationViewsSubject.GetPresentation(linkedElements[0]);
+						foreach (DslDiagrams::PresentationElement presentationElement in presentationElements)
+						{
+							DslDiagrams::ShapeElement shape = presentationElement as DslDiagrams::ShapeElement;
+							if (shape != null)
+							{
+								sourceShape = shape;
+								break;
+							}
+						}
+					}
+					
+					if(targetShape == null)
+					{
+						DslModeling::LinkedElementCollection<DslDiagrams::PresentationElement> presentationElements = DslDiagrams::PresentationViewsSubject.GetPresentation(linkedElements[1]);
+						foreach (DslDiagrams::PresentationElement presentationElement in presentationElements)
+						{
+							DslDiagrams::ShapeElement shape = presentationElement as DslDiagrams::ShapeElement;
+							if (shape != null)
+							{
+								targetShape = shape;
+								break;
+							}
+						}
+					}
+					
+					if(sourceShape == null || targetShape == null)
+					{
+						global::System.Diagnostics.Debug.Fail("Unable to find source and/or target shape for view fixup.");
+						return null;
+					}
+	
+					DslDiagrams::ShapeElement sourceParent = sourceShape.ParentShape;
+					DslDiagrams::ShapeElement targetParent = targetShape.ParentShape;
+	
+					while (sourceParent != targetParent && sourceParent != null)
+					{
+						DslDiagrams::ShapeElement curParent = targetParent;
+						while (sourceParent != curParent && curParent != null)
+						{
+							curParent = curParent.ParentShape;
+						}
+	
+						if(sourceParent == curParent)
+						{
+							break;
+						}
+						else
+						{
+							sourceParent = sourceParent.ParentShape;
+						}
+					}
+	
+					while (sourceParent != null)
+					{
+						// ensure that the parent can parent connectors (i.e., a diagram or a swimlane).
+						if(sourceParent is DslDiagrams::Diagram || sourceParent is DslDiagrams::SwimlaneShape)
+						{
+							break;
+						}
+						else
+						{
+							sourceParent = sourceParent.ParentShape;
+						}
+					}
+	
+					global::System.Diagnostics.Debug.Assert(sourceParent != null && sourceParent.ModelElement != null, "Unable to find common parent for view fixup.");
+					return sourceParent.ModelElement;
+				}
+	
+				return null;
+			}
 		}
 		
 	
+		/// <summary>
+		/// A rule which fires when data mapped to outer text decorators has changed,
+		/// so we can update the decorator host's bounds.
+		/// </summary>
+		[DslModeling::RuleOn(typeof(global::Company.Workshop8.ConcernReferencesTargetConcern), InitiallyDisabled=true)]
+		internal sealed class DecoratorPropertyChanged : DslModeling::ChangeRule
+		{
+			[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+			public override void ElementPropertyChanged(DslModeling::ElementPropertyChangedEventArgs e)
+			{
+				if(e == null) throw new global::System.ArgumentNullException("e");
+				
+				if (e.DomainProperty.Id == global::Company.Workshop8.ConcernReferencesTargetConcern.SignDomainPropertyId)
+				{
+					DslDiagrams::Decorator decorator = global::Company.Workshop8.RelationshipShape.FindRelationshipShapeDecorator("SignShape");
+					if(decorator != null)
+					{
+						decorator.UpdateDecoratorHostShapes(e.ModelElement, global::Company.Workshop8.ConcernReferencesTargetConcern.DomainClassId);
+					}
+				}
+			}
+		}
+	
+		/// <summary>
+		/// Reroute a connector when the role players of its underlying relationship change
+		/// </summary>
+		[DslModeling::RuleOn(typeof(global::Company.Workshop8.ConcernReferencesTargetConcern), FireTime = DslModeling::TimeToFire.TopLevelCommit, Priority = DslDiagrams::DiagramFixupConstants.AddConnectionRulePriority, InitiallyDisabled=true)]
+		internal sealed class ConnectorRolePlayerChanged : DslModeling::RolePlayerChangeRule
+		{
+			/// <summary>
+			/// Reroute a connector when the role players of its underlying relationship change
+			/// </summary>
+			public override void RolePlayerChanged(DslModeling::RolePlayerChangedEventArgs e)
+			{
+				if (e == null) throw new global::System.ArgumentNullException("e");
+	
+				global::System.Collections.ObjectModel.ReadOnlyCollection<DslDiagrams::PresentationViewsSubject> connectorLinks = DslDiagrams::PresentationViewsSubject.GetLinksToPresentation(e.ElementLink);
+				foreach (DslDiagrams::PresentationViewsSubject connectorLink in connectorLinks)
+				{
+					// Fix up any binary link shapes attached to the element link.
+					DslDiagrams::BinaryLinkShape linkShape = connectorLink.Presentation as DslDiagrams::BinaryLinkShape;
+					if (linkShape != null)
+					{
+						global::Company.Workshop8.Workshop8Diagram diagram = linkShape.Diagram as global::Company.Workshop8.Workshop8Diagram;
+						if (diagram != null)
+						{
+							if (e.NewRolePlayer != null)
+							{
+								DslDiagrams::NodeShape fromShape;
+								DslDiagrams::NodeShape toShape;
+								diagram.GetSourceAndTargetForConnector(linkShape, out fromShape, out toShape);
+								if (fromShape != null && toShape != null)
+								{
+									if (!object.Equals(fromShape, linkShape.FromShape))
+									{
+										linkShape.FromShape = fromShape;
+									}
+									if (!object.Equals(linkShape.ToShape, toShape))
+									{
+										linkShape.ToShape = toShape;
+									}
+								}
+								else
+								{
+									// delete the connector if we cannot find an appropriate target shape.
+									linkShape.Delete();
+								}
+							}
+							else
+							{
+								// delete the connector if the new role player is null.
+								linkShape.Delete();
+							}
+						}
+					}
+				}
+			}
+		}
 	}

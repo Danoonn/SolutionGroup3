@@ -642,6 +642,94 @@ namespace Company.Workshop8
 			return GetRoleCollection<DslModeling::LinkedElementCollection<Concern>, Concern>(element, SourceConcernDomainRoleId);
 		}
 		#endregion
+		#region Sign domain property code
+		
+		/// <summary>
+		/// Sign domain property Id.
+		/// </summary>
+		public static readonly global::System.Guid SignDomainPropertyId = new global::System.Guid(0xd5bbe288, 0xa80f, 0x4e8b, 0x82, 0x9f, 0x7c, 0x4b, 0x59, 0x71, 0x25, 0xd9);
+		
+		/// <summary>
+		/// Storage for Sign
+		/// </summary>
+		private global::System.String signPropertyStorage = "+/-/Undecided";
+		
+		/// <summary>
+		/// Gets or sets the value of Sign domain property.
+		/// Description for Company.Workshop8.ConcernReferencesTargetConcern.Sign
+		/// </summary>
+		[DslDesign::DisplayNameResource("Company.Workshop8.ConcernReferencesTargetConcern/Sign.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[DslDesign::DescriptionResource("Company.Workshop8.ConcernReferencesTargetConcern/Sign.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[global::System.ComponentModel.DefaultValue("+/-/Undecided")]
+		[DslModeling::DomainObjectId("d5bbe288-a80f-4e8b-829f-7c4b597125d9")]
+		public global::System.String Sign
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get
+			{
+				return signPropertyStorage;
+			}
+			[global::System.Diagnostics.DebuggerStepThrough]
+			set
+			{
+				SignPropertyHandler.Instance.SetValue(this, value);
+			}
+		}
+		/// <summary>
+		/// Value handler for the ConcernReferencesTargetConcern.Sign domain property.
+		/// </summary>
+		internal sealed partial class SignPropertyHandler : DslModeling::DomainPropertyValueHandler<ConcernReferencesTargetConcern, global::System.String>
+		{
+			private SignPropertyHandler() { }
+		
+			/// <summary>
+			/// Gets the singleton instance of the ConcernReferencesTargetConcern.Sign domain property value handler.
+			/// </summary>
+			public static readonly SignPropertyHandler Instance = new SignPropertyHandler();
+		
+			/// <summary>
+			/// Gets the Id of the ConcernReferencesTargetConcern.Sign domain property.
+			/// </summary>
+			public sealed override global::System.Guid DomainPropertyId
+			{
+				[global::System.Diagnostics.DebuggerStepThrough]
+				get
+				{
+					return SignDomainPropertyId;
+				}
+			}
+			
+			/// <summary>
+			/// Gets a strongly-typed value of the property on specified element.
+			/// </summary>
+			/// <param name="element">Element which owns the property.</param>
+			/// <returns>Property value.</returns>
+			public override sealed global::System.String GetValue(ConcernReferencesTargetConcern element)
+			{
+				if (element == null) throw new global::System.ArgumentNullException("element");
+				return element.signPropertyStorage;
+			}
+		
+			/// <summary>
+			/// Sets property value on an element.
+			/// </summary>
+			/// <param name="element">Element which owns the property.</param>
+			/// <param name="newValue">New property value.</param>
+			public override sealed void SetValue(ConcernReferencesTargetConcern element, global::System.String newValue)
+			{
+				if (element == null) throw new global::System.ArgumentNullException("element");
+		
+				global::System.String oldValue = GetValue(element);
+				if (newValue != oldValue)
+				{
+					ValueChanging(element, oldValue, newValue);
+					element.signPropertyStorage = newValue;
+					ValueChanged(element, oldValue, newValue);
+				}
+			}
+		}
+		
+		#endregion
 		#region SourceConcern link accessor
 		/// <summary>
 		/// Get the list of ConcernReferencesTargetConcern links to a Concern.
@@ -695,6 +783,246 @@ namespace Company.Workshop8
 			foreach ( global::Company.Workshop8.ConcernReferencesTargetConcern link in links )
 			{
 				if ( target.Equals(link.TargetConcern) )
+				{
+					return link;
+				}
+			}
+			return null;
+		}
+		
+		#endregion
+	}
+}
+namespace Company.Workshop8
+{
+	/// <summary>
+	/// DomainRelationship SoftwareArchitectureHasLegend
+	/// Description for Company.Workshop8.SoftwareArchitectureHasLegend
+	/// </summary>
+	[DslDesign::DisplayNameResource("Company.Workshop8.SoftwareArchitectureHasLegend.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+	[DslDesign::DescriptionResource("Company.Workshop8.SoftwareArchitectureHasLegend.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+	[DslModeling::DomainModelOwner(typeof(global::Company.Workshop8.Workshop8DomainModel))]
+	[global::System.CLSCompliant(true)]
+	[DslModeling::DomainRelationship(IsEmbedding=true)]
+	[DslModeling::DomainObjectId("84e9583d-f17f-4938-a4cd-7e86161d34f0")]
+	public partial class SoftwareArchitectureHasLegend : DslModeling::ElementLink
+	{
+		#region Constructors, domain class Id
+		
+		/// <summary>
+		/// SoftwareArchitectureHasLegend domain class Id.
+		/// </summary>
+		public static readonly new global::System.Guid DomainClassId = new global::System.Guid(0x84e9583d, 0xf17f, 0x4938, 0xa4, 0xcd, 0x7e, 0x86, 0x16, 0x1d, 0x34, 0xf0);
+	
+				
+		/// <summary>
+		/// Constructor
+		/// Creates a SoftwareArchitectureHasLegend link in the same Partition as the given SoftwareArchitecture
+		/// </summary>
+		/// <param name="source">SoftwareArchitecture to use as the source of the relationship.</param>
+		/// <param name="target">Legend to use as the target of the relationship.</param>
+		public SoftwareArchitectureHasLegend(SoftwareArchitecture source, Legend target)
+			: base((source != null ? source.Partition : null), new DslModeling::RoleAssignment[]{new DslModeling::RoleAssignment(SoftwareArchitectureHasLegend.SoftwareArchitectureDomainRoleId, source), new DslModeling::RoleAssignment(SoftwareArchitectureHasLegend.LegendDomainRoleId, target)}, null)
+		{
+		}
+		
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="store">Store where new link is to be created.</param>
+		/// <param name="roleAssignments">List of relationship role assignments.</param>
+		public SoftwareArchitectureHasLegend(DslModeling::Store store, params DslModeling::RoleAssignment[] roleAssignments)
+			: base(store != null ? store.DefaultPartitionForClass(DomainClassId) : null, roleAssignments, null)
+		{
+		}
+		
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="store">Store where new link is to be created.</param>
+		/// <param name="roleAssignments">List of relationship role assignments.</param>
+		/// <param name="propertyAssignments">List of properties assignments to set on the new link.</param>
+		public SoftwareArchitectureHasLegend(DslModeling::Store store, DslModeling::RoleAssignment[] roleAssignments, DslModeling::PropertyAssignment[] propertyAssignments)
+			: base(store != null ? store.DefaultPartitionForClass(DomainClassId) : null, roleAssignments, propertyAssignments)
+		{
+		}
+		
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="partition">Partition where new link is to be created.</param>
+		/// <param name="roleAssignments">List of relationship role assignments.</param>
+		public SoftwareArchitectureHasLegend(DslModeling::Partition partition, params DslModeling::RoleAssignment[] roleAssignments)
+			: base(partition, roleAssignments, null)
+		{
+		}
+		
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="partition">Partition where new link is to be created.</param>
+		/// <param name="roleAssignments">List of relationship role assignments.</param>
+		/// <param name="propertyAssignments">List of properties assignments to set on the new link.</param>
+		public SoftwareArchitectureHasLegend(DslModeling::Partition partition, DslModeling::RoleAssignment[] roleAssignments, DslModeling::PropertyAssignment[] propertyAssignments)
+			: base(partition, roleAssignments, propertyAssignments)
+		{
+		}
+		#endregion
+		#region SoftwareArchitecture domain role code
+		
+		/// <summary>
+		/// SoftwareArchitecture domain role Id.
+		/// </summary>
+		public static readonly global::System.Guid SoftwareArchitectureDomainRoleId = new global::System.Guid(0x6d507379, 0xfbaa, 0x4ae4, 0x81, 0x86, 0x83, 0x43, 0x26, 0x98, 0xcd, 0xe2);
+		
+		/// <summary>
+		/// DomainRole SoftwareArchitecture
+		/// Description for
+		/// Company.Workshop8.SoftwareArchitectureHasLegend.SoftwareArchitecture
+		/// </summary>
+		[DslDesign::DisplayNameResource("Company.Workshop8.SoftwareArchitectureHasLegend/SoftwareArchitecture.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[DslDesign::DescriptionResource("Company.Workshop8.SoftwareArchitectureHasLegend/SoftwareArchitecture.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[DslModeling::DomainRole(DslModeling::DomainRoleOrder.Source, PropertyName = "Legend", PropertyDisplayNameKey="Company.Workshop8.SoftwareArchitectureHasLegend/SoftwareArchitecture.PropertyDisplayName",  PropagatesCopy = DslModeling::PropagatesCopyOption.PropagatesCopyToLinkAndOppositeRolePlayer, Multiplicity = DslModeling::Multiplicity.ZeroMany)]
+		[DslModeling::DomainObjectId("6d507379-fbaa-4ae4-8186-83432698cde2")]
+		public virtual SoftwareArchitecture SoftwareArchitecture
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get
+			{
+				return (SoftwareArchitecture)DslModeling::DomainRoleInfo.GetRolePlayer(this, SoftwareArchitectureDomainRoleId);
+			}
+			[global::System.Diagnostics.DebuggerStepThrough]
+			set
+			{
+				DslModeling::DomainRoleInfo.SetRolePlayer(this, SoftwareArchitectureDomainRoleId, value);
+			}
+		}
+				
+		#endregion
+		#region Static methods to access SoftwareArchitecture of a Legend
+		/// <summary>
+		/// Gets SoftwareArchitecture.
+		/// </summary>
+		[global::System.Diagnostics.DebuggerStepThrough]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+		public static SoftwareArchitecture GetSoftwareArchitecture(Legend element)
+		{
+			return DslModeling::DomainRoleInfo.GetLinkedElement(element, LegendDomainRoleId) as SoftwareArchitecture;
+		}
+		
+		/// <summary>
+		/// Sets SoftwareArchitecture.
+		/// </summary>
+		[global::System.Diagnostics.DebuggerStepThrough]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+		public static void SetSoftwareArchitecture(Legend element, SoftwareArchitecture newSoftwareArchitecture)
+		{
+			DslModeling::DomainRoleInfo.SetLinkedElement(element, LegendDomainRoleId, newSoftwareArchitecture);
+		}
+		#endregion
+		#region Legend domain role code
+		
+		/// <summary>
+		/// Legend domain role Id.
+		/// </summary>
+		public static readonly global::System.Guid LegendDomainRoleId = new global::System.Guid(0x8ba527b3, 0xc33f, 0x46c5, 0x9c, 0x4b, 0x16, 0xde, 0xd3, 0x6f, 0x9a, 0x87);
+		
+		/// <summary>
+		/// DomainRole Legend
+		/// Description for Company.Workshop8.SoftwareArchitectureHasLegend.Legend
+		/// </summary>
+		[DslDesign::DisplayNameResource("Company.Workshop8.SoftwareArchitectureHasLegend/Legend.DisplayName", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[DslDesign::DescriptionResource("Company.Workshop8.SoftwareArchitectureHasLegend/Legend.Description", typeof(global::Company.Workshop8.Workshop8DomainModel), "Company.Workshop8.GeneratedCode.DomainModelResx")]
+		[DslModeling::DomainRole(DslModeling::DomainRoleOrder.Target, PropertyName = "SoftwareArchitecture", PropertyDisplayNameKey="Company.Workshop8.SoftwareArchitectureHasLegend/Legend.PropertyDisplayName", PropagatesDelete = true,  PropagatesCopy = DslModeling::PropagatesCopyOption.DoNotPropagateCopy, Multiplicity = DslModeling::Multiplicity.One)]
+		[DslModeling::DomainObjectId("8ba527b3-c33f-46c5-9c4b-16ded36f9a87")]
+		public virtual Legend Legend
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get
+			{
+				return (Legend)DslModeling::DomainRoleInfo.GetRolePlayer(this, LegendDomainRoleId);
+			}
+			[global::System.Diagnostics.DebuggerStepThrough]
+			set
+			{
+				DslModeling::DomainRoleInfo.SetRolePlayer(this, LegendDomainRoleId, value);
+			}
+		}
+				
+		#endregion
+		#region Static methods to access Legend of a SoftwareArchitecture
+		/// <summary>
+		/// Gets a list of Legend.
+		/// </summary>
+		[global::System.Diagnostics.DebuggerStepThrough]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+		public static DslModeling::LinkedElementCollection<Legend> GetLegend(SoftwareArchitecture element)
+		{
+			return GetRoleCollection<DslModeling::LinkedElementCollection<Legend>, Legend>(element, SoftwareArchitectureDomainRoleId);
+		}
+		#endregion
+		#region SoftwareArchitecture link accessor
+		/// <summary>
+		/// Get the list of SoftwareArchitectureHasLegend links to a SoftwareArchitecture.
+		/// </summary>
+		[global::System.Diagnostics.DebuggerStepThrough]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+		public static global::System.Collections.ObjectModel.ReadOnlyCollection<global::Company.Workshop8.SoftwareArchitectureHasLegend> GetLinksToLegend ( global::Company.Workshop8.SoftwareArchitecture softwareArchitectureInstance )
+		{
+			return DslModeling::DomainRoleInfo.GetElementLinks<global::Company.Workshop8.SoftwareArchitectureHasLegend>(softwareArchitectureInstance, global::Company.Workshop8.SoftwareArchitectureHasLegend.SoftwareArchitectureDomainRoleId);
+		}
+		#endregion
+		#region Legend link accessor
+		/// <summary>
+		/// Get the SoftwareArchitectureHasLegend link to a Legend.
+		/// </summary>
+		[global::System.Diagnostics.DebuggerStepThrough]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+		public static global::Company.Workshop8.SoftwareArchitectureHasLegend GetLinkToSoftwareArchitecture (global::Company.Workshop8.Legend legendInstance)
+		{
+			global::System.Collections.Generic.IList<global::Company.Workshop8.SoftwareArchitectureHasLegend> links = DslModeling::DomainRoleInfo.GetElementLinks<global::Company.Workshop8.SoftwareArchitectureHasLegend>(legendInstance, global::Company.Workshop8.SoftwareArchitectureHasLegend.LegendDomainRoleId);
+			global::System.Diagnostics.Debug.Assert(links.Count <= 1, "Multiplicity of Legend not obeyed.");
+			if ( links.Count == 0 )
+			{
+				return null;
+			}
+			else
+			{
+				return links[0];
+			}
+		}
+		#endregion
+		#region SoftwareArchitectureHasLegend instance accessors
+		
+		/// <summary>
+		/// Get any SoftwareArchitectureHasLegend links between a given SoftwareArchitecture and a Legend.
+		/// </summary>
+		[global::System.Diagnostics.DebuggerStepThrough]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+		public static global::System.Collections.ObjectModel.ReadOnlyCollection<global::Company.Workshop8.SoftwareArchitectureHasLegend> GetLinks( global::Company.Workshop8.SoftwareArchitecture source, global::Company.Workshop8.Legend target )
+		{
+			global::System.Collections.Generic.List<global::Company.Workshop8.SoftwareArchitectureHasLegend> outLinks = new global::System.Collections.Generic.List<global::Company.Workshop8.SoftwareArchitectureHasLegend>();
+			global::System.Collections.Generic.IList<global::Company.Workshop8.SoftwareArchitectureHasLegend> links = DslModeling::DomainRoleInfo.GetElementLinks<global::Company.Workshop8.SoftwareArchitectureHasLegend>(source, global::Company.Workshop8.SoftwareArchitectureHasLegend.SoftwareArchitectureDomainRoleId);
+			foreach ( global::Company.Workshop8.SoftwareArchitectureHasLegend link in links )
+			{
+				if ( target.Equals(link.Legend) )
+				{
+					outLinks.Add(link);
+				}
+			}
+			return outLinks.AsReadOnly();
+		}
+		/// <summary>
+		/// Get the one SoftwareArchitectureHasLegend link between a given SoftwareArchitectureand a Legend.
+		/// </summary>
+		[global::System.Diagnostics.DebuggerStepThrough]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+		public static global::Company.Workshop8.SoftwareArchitectureHasLegend GetLink( global::Company.Workshop8.SoftwareArchitecture source, global::Company.Workshop8.Legend target )
+		{
+			global::System.Collections.Generic.IList<global::Company.Workshop8.SoftwareArchitectureHasLegend> links = DslModeling::DomainRoleInfo.GetElementLinks<global::Company.Workshop8.SoftwareArchitectureHasLegend>(source, global::Company.Workshop8.SoftwareArchitectureHasLegend.SoftwareArchitectureDomainRoleId);
+			foreach ( global::Company.Workshop8.SoftwareArchitectureHasLegend link in links )
+			{
+				if ( target.Equals(link.Legend) )
 				{
 					return link;
 				}

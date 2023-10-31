@@ -32,6 +32,21 @@
               </xsd:sequence>
             </xsd:complexType>
           </xsd:element>
+          <!-- Relationship: SoftwareArchitectureHasLegend -->
+          <xsd:element name="legend" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of SoftwareArchitectureHasLegend</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="softwareArchitectureHasLegend" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of SoftwareArchitectureHasLegend needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
         </xsd:sequence>
         <!-- Id -->
         <xsd:attribute name="Id" type="xsd:string">
@@ -374,6 +389,67 @@
     </xsd:complexContent>
   </xsd:complexType>
   
+  <!-- SoftwareSolution -->
+  <xsd:element name="softwareSolution" type="SoftwareSolution" substitutionGroup="concern" />
+  <xsd:complexType name="SoftwareSolution">
+    <xsd:complexContent>
+      <xsd:extension base="Concern">
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: SoSolutionName -->
+        <xsd:attribute name="soSolutionName" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- SoftwareSolution Moniker -->
+  <xsd:element name="softwareSolutionMoniker" type="SoftwareSolutionMoniker" substitutionGroup="concernMoniker" />
+  <xsd:complexType name="SoftwareSolutionMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for SoftwareSolution instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ConcernMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Legend -->
+  <xsd:element name="legend" type="Legend" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="Legend">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Legend Moniker -->
+  <xsd:element name="legendMoniker" type="LegendMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="LegendMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Legend instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
   <!-- SoftwareArchitectureHasElements -->
   <xsd:element name="softwareArchitectureHasElements" abstract="true" type="SoftwareArchitectureHasElements" substitutionGroup="core:modelElement" />
   <xsd:complexType name="SoftwareArchitectureHasElements" abstract="true" >
@@ -476,6 +552,8 @@
             <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
           </xsd:annotation>
         </xsd:attribute>
+        <!-- Property: Sign -->
+        <xsd:attribute name="sign" type="xsd:string" />
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -485,6 +563,46 @@
   <xsd:complexType name="ConcernReferencesTargetConcernMoniker">
     <xsd:annotation>
       <xsd:documentation>Moniker for ConcernReferencesTargetConcern instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- SoftwareArchitectureHasLegend -->
+  <xsd:element name="softwareArchitectureHasLegend" type="SoftwareArchitectureHasLegend" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="SoftwareArchitectureHasLegend">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end Legend -->
+          <xsd:element ref="legend" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- SoftwareArchitectureHasLegend Moniker -->
+  <xsd:element name="softwareArchitectureHasLegendMoniker" type="SoftwareArchitectureHasLegendMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="SoftwareArchitectureHasLegendMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for SoftwareArchitectureHasLegend instance.</xsd:documentation>
     </xsd:annotation>
     <xsd:complexContent>
       <xsd:extension base="core:ModelElementMoniker">

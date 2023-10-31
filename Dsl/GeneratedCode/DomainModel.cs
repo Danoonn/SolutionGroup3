@@ -77,12 +77,15 @@ namespace Company.Workshop8
 				typeof(SocialConcern),
 				typeof(EnvironmentalConcern),
 				typeof(TechnicalConcern),
+				typeof(SoftwareSolution),
+				typeof(Legend),
 				typeof(SoftwareArchitectureHasElements),
 				typeof(ImpactLevelHasConcern),
 				typeof(ConcernReferencesTargetConcern),
+				typeof(SoftwareArchitectureHasLegend),
 				typeof(Workshop8Diagram),
-				typeof(ExampleConnector),
 				typeof(Relationship),
+				typeof(RelationshipShape),
 				typeof(ExampleShape),
 				typeof(StructuralShape),
 				typeof(EnablingShape),
@@ -91,7 +94,12 @@ namespace Company.Workshop8
 				typeof(SocialConcernShape),
 				typeof(EnvironmentalConcernShape),
 				typeof(TechnicalConcernShape),
+				typeof(SoftwareSolutionShape),
+				typeof(ConcernShape),
+				typeof(LegendShape),
 				typeof(global::Company.Workshop8.FixUpDiagram),
+				typeof(global::Company.Workshop8.DecoratorPropertyChanged),
+				typeof(global::Company.Workshop8.ConnectorRolePlayerChanged),
 			};
 		}
 		/// <summary>
@@ -112,6 +120,8 @@ namespace Company.Workshop8
 				new DomainMemberInfo(typeof(SocialConcern), "SocialName", SocialConcern.SocialNameDomainPropertyId, typeof(SocialConcern.SocialNamePropertyHandler)),
 				new DomainMemberInfo(typeof(EnvironmentalConcern), "EnvironmentalName", EnvironmentalConcern.EnvironmentalNameDomainPropertyId, typeof(EnvironmentalConcern.EnvironmentalNamePropertyHandler)),
 				new DomainMemberInfo(typeof(TechnicalConcern), "TechName", TechnicalConcern.TechNameDomainPropertyId, typeof(TechnicalConcern.TechNamePropertyHandler)),
+				new DomainMemberInfo(typeof(SoftwareSolution), "SoSolutionName", SoftwareSolution.SoSolutionNameDomainPropertyId, typeof(SoftwareSolution.SoSolutionNamePropertyHandler)),
+				new DomainMemberInfo(typeof(ConcernReferencesTargetConcern), "Sign", ConcernReferencesTargetConcern.SignDomainPropertyId, typeof(ConcernReferencesTargetConcern.SignPropertyHandler)),
 			};
 		}
 		/// <summary>
@@ -128,6 +138,8 @@ namespace Company.Workshop8
 				new DomainRolePlayerInfo(typeof(ImpactLevelHasConcern), "Concern", ImpactLevelHasConcern.ConcernDomainRoleId),
 				new DomainRolePlayerInfo(typeof(ConcernReferencesTargetConcern), "SourceConcern", ConcernReferencesTargetConcern.SourceConcernDomainRoleId),
 				new DomainRolePlayerInfo(typeof(ConcernReferencesTargetConcern), "TargetConcern", ConcernReferencesTargetConcern.TargetConcernDomainRoleId),
+				new DomainRolePlayerInfo(typeof(SoftwareArchitectureHasLegend), "SoftwareArchitecture", SoftwareArchitectureHasLegend.SoftwareArchitectureDomainRoleId),
+				new DomainRolePlayerInfo(typeof(SoftwareArchitectureHasLegend), "Legend", SoftwareArchitectureHasLegend.LegendDomainRoleId),
 			};
 		}
 		#endregion
@@ -149,7 +161,7 @@ namespace Company.Workshop8
 	
 			if (createElementMap == null)
 			{
-				createElementMap = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(21);
+				createElementMap = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(26);
 				createElementMap.Add(typeof(SoftwareArchitecture), 0);
 				createElementMap.Add(typeof(ImpactLevel), 1);
 				createElementMap.Add(typeof(Structural), 2);
@@ -160,17 +172,22 @@ namespace Company.Workshop8
 				createElementMap.Add(typeof(SocialConcern), 7);
 				createElementMap.Add(typeof(EnvironmentalConcern), 8);
 				createElementMap.Add(typeof(TechnicalConcern), 9);
-				createElementMap.Add(typeof(Workshop8Diagram), 10);
-				createElementMap.Add(typeof(ExampleConnector), 11);
-				createElementMap.Add(typeof(Relationship), 12);
-				createElementMap.Add(typeof(ExampleShape), 13);
-				createElementMap.Add(typeof(StructuralShape), 14);
-				createElementMap.Add(typeof(EnablingShape), 15);
-				createElementMap.Add(typeof(ImmediateShape), 16);
-				createElementMap.Add(typeof(EconomicConcernShape), 17);
-				createElementMap.Add(typeof(SocialConcernShape), 18);
-				createElementMap.Add(typeof(EnvironmentalConcernShape), 19);
-				createElementMap.Add(typeof(TechnicalConcernShape), 20);
+				createElementMap.Add(typeof(SoftwareSolution), 10);
+				createElementMap.Add(typeof(Legend), 11);
+				createElementMap.Add(typeof(Workshop8Diagram), 12);
+				createElementMap.Add(typeof(Relationship), 13);
+				createElementMap.Add(typeof(RelationshipShape), 14);
+				createElementMap.Add(typeof(ExampleShape), 15);
+				createElementMap.Add(typeof(StructuralShape), 16);
+				createElementMap.Add(typeof(EnablingShape), 17);
+				createElementMap.Add(typeof(ImmediateShape), 18);
+				createElementMap.Add(typeof(EconomicConcernShape), 19);
+				createElementMap.Add(typeof(SocialConcernShape), 20);
+				createElementMap.Add(typeof(EnvironmentalConcernShape), 21);
+				createElementMap.Add(typeof(TechnicalConcernShape), 22);
+				createElementMap.Add(typeof(SoftwareSolutionShape), 23);
+				createElementMap.Add(typeof(ConcernShape), 24);
+				createElementMap.Add(typeof(LegendShape), 25);
 			}
 			int index;
 			if (!createElementMap.TryGetValue(elementType, out index))
@@ -194,17 +211,22 @@ namespace Company.Workshop8
 				case 7: return new SocialConcern(partition, propertyAssignments);
 				case 8: return new EnvironmentalConcern(partition, propertyAssignments);
 				case 9: return new TechnicalConcern(partition, propertyAssignments);
-				case 10: return new Workshop8Diagram(partition, propertyAssignments);
-				case 11: return new ExampleConnector(partition, propertyAssignments);
-				case 12: return new Relationship(partition, propertyAssignments);
-				case 13: return new ExampleShape(partition, propertyAssignments);
-				case 14: return new StructuralShape(partition, propertyAssignments);
-				case 15: return new EnablingShape(partition, propertyAssignments);
-				case 16: return new ImmediateShape(partition, propertyAssignments);
-				case 17: return new EconomicConcernShape(partition, propertyAssignments);
-				case 18: return new SocialConcernShape(partition, propertyAssignments);
-				case 19: return new EnvironmentalConcernShape(partition, propertyAssignments);
-				case 20: return new TechnicalConcernShape(partition, propertyAssignments);
+				case 10: return new SoftwareSolution(partition, propertyAssignments);
+				case 11: return new Legend(partition, propertyAssignments);
+				case 12: return new Workshop8Diagram(partition, propertyAssignments);
+				case 13: return new Relationship(partition, propertyAssignments);
+				case 14: return new RelationshipShape(partition, propertyAssignments);
+				case 15: return new ExampleShape(partition, propertyAssignments);
+				case 16: return new StructuralShape(partition, propertyAssignments);
+				case 17: return new EnablingShape(partition, propertyAssignments);
+				case 18: return new ImmediateShape(partition, propertyAssignments);
+				case 19: return new EconomicConcernShape(partition, propertyAssignments);
+				case 20: return new SocialConcernShape(partition, propertyAssignments);
+				case 21: return new EnvironmentalConcernShape(partition, propertyAssignments);
+				case 22: return new TechnicalConcernShape(partition, propertyAssignments);
+				case 23: return new SoftwareSolutionShape(partition, propertyAssignments);
+				case 24: return new ConcernShape(partition, propertyAssignments);
+				case 25: return new LegendShape(partition, propertyAssignments);
 				default: return null;
 			}
 		}
@@ -227,10 +249,11 @@ namespace Company.Workshop8
 	
 			if (createElementLinkMap == null)
 			{
-				createElementLinkMap = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(3);
+				createElementLinkMap = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(4);
 				createElementLinkMap.Add(typeof(SoftwareArchitectureHasElements), 0);
 				createElementLinkMap.Add(typeof(ImpactLevelHasConcern), 1);
 				createElementLinkMap.Add(typeof(ConcernReferencesTargetConcern), 2);
+				createElementLinkMap.Add(typeof(SoftwareArchitectureHasLegend), 3);
 			}
 			int index;
 			if (!createElementLinkMap.TryGetValue(elementLinkType, out index))
@@ -248,6 +271,7 @@ namespace Company.Workshop8
 				case 0: return new SoftwareArchitectureHasElements(partition, roleAssignments, propertyAssignments);
 				case 1: return new ImpactLevelHasConcern(partition, roleAssignments, propertyAssignments);
 				case 2: return new ConcernReferencesTargetConcern(partition, roleAssignments, propertyAssignments);
+				case 3: return new SoftwareArchitectureHasLegend(partition, roleAssignments, propertyAssignments);
 				default: return null;
 			}
 		}
@@ -368,6 +392,8 @@ namespace Company.Workshop8
 			
 			DslModeling::RuleManager ruleManager = store.RuleManager;
 			ruleManager.EnableRule(typeof(global::Company.Workshop8.FixUpDiagram));
+			ruleManager.EnableRule(typeof(global::Company.Workshop8.DecoratorPropertyChanged));
+			ruleManager.EnableRule(typeof(global::Company.Workshop8.ConnectorRolePlayerChanged));
 		}
 		
 		/// <summary>
@@ -379,6 +405,8 @@ namespace Company.Workshop8
 			
 			DslModeling::RuleManager ruleManager = store.RuleManager;
 			ruleManager.DisableRule(typeof(global::Company.Workshop8.FixUpDiagram));
+			ruleManager.DisableRule(typeof(global::Company.Workshop8.DecoratorPropertyChanged));
+			ruleManager.DisableRule(typeof(global::Company.Workshop8.ConnectorRolePlayerChanged));
 		}
 		#endregion
 	}
@@ -416,6 +444,7 @@ namespace Company.Workshop8
 			#region Initialize DomainData Table
 			DomainRoles.Add(global::Company.Workshop8.SoftwareArchitectureHasElements.ElementDomainRoleId, true);
 			DomainRoles.Add(global::Company.Workshop8.ImpactLevelHasConcern.ConcernDomainRoleId, true);
+			DomainRoles.Add(global::Company.Workshop8.SoftwareArchitectureHasLegend.LegendDomainRoleId, true);
 			#endregion
 		}
 		/// <summary>

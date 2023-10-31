@@ -30,21 +30,13 @@ namespace Company.Workshop8
 	[VSShell::ProvideToolWindowVisibility(typeof(Workshop8ExplorerToolWindow), Constants.Workshop8EditorFactoryId)]
 	[VSShell::ProvideStaticToolboxGroup("@Workshop8ToolboxTab;Company.Workshop8.Dsl.dll", "Company.Workshop8.Workshop8ToolboxTab")]
 	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
-					"@ExampleElementToolboxItem;Company.Workshop8.Dsl.dll", 
-					"Company.Workshop8.ExampleElementToolboxItem", 
-					"CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS", 
-					"CreateExampleClassF1Keyword", 
-					"@ExampleElementToolboxBitmap;Company.Workshop8.Dsl.dll", 
-					0xff00ff,
-					Index = 0)]
-	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
 					"@StructuralToolboxItem;Company.Workshop8.Dsl.dll", 
 					"Company.Workshop8.StructuralToolboxItem", 
 					"CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS", 
 					"Structural", 
 					"@StructuralToolboxBitmap;Company.Workshop8.Dsl.dll", 
 					0xff00ff,
-					Index = 1)]
+					Index = 0)]
 	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
 					"@EnablingToolboxItem;Company.Workshop8.Dsl.dll", 
 					"Company.Workshop8.EnablingToolboxItem", 
@@ -52,7 +44,7 @@ namespace Company.Workshop8
 					"Enabling", 
 					"@EnablingToolboxBitmap;Company.Workshop8.Dsl.dll", 
 					0xff00ff,
-					Index = 2)]
+					Index = 1)]
 	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
 					"@ImmediateToolboxItem;Company.Workshop8.Dsl.dll", 
 					"Company.Workshop8.ImmediateToolboxItem", 
@@ -60,7 +52,7 @@ namespace Company.Workshop8
 					"Immediate", 
 					"@ImmediateToolboxBitmap;Company.Workshop8.Dsl.dll", 
 					0xff00ff,
-					Index = 3)]
+					Index = 2)]
 	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
 					"@EconomicConcernToolboxItem;Company.Workshop8.Dsl.dll", 
 					"Company.Workshop8.EconomicConcernToolboxItem", 
@@ -68,7 +60,7 @@ namespace Company.Workshop8
 					"EconomicConcern", 
 					"@EconomicConcernToolboxBitmap;Company.Workshop8.Dsl.dll", 
 					0xff00ff,
-					Index = 4)]
+					Index = 3)]
 	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
 					"@SocialConcernToolboxItem;Company.Workshop8.Dsl.dll", 
 					"Company.Workshop8.SocialConcernToolboxItem", 
@@ -76,7 +68,7 @@ namespace Company.Workshop8
 					"SocialConcern", 
 					"@SocialConcernToolboxBitmap;Company.Workshop8.Dsl.dll", 
 					0xff00ff,
-					Index = 5)]
+					Index = 4)]
 	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
 					"@EnvironmentalConcernToolboxItem;Company.Workshop8.Dsl.dll", 
 					"Company.Workshop8.EnvironmentalConcernToolboxItem", 
@@ -84,7 +76,7 @@ namespace Company.Workshop8
 					"EnvironmentalConcern", 
 					"@EnvironmentalConcernToolboxBitmap;Company.Workshop8.Dsl.dll", 
 					0xff00ff,
-					Index = 6)]
+					Index = 5)]
 	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
 					"@TechnicalConcernToolboxItem;Company.Workshop8.Dsl.dll", 
 					"Company.Workshop8.TechnicalConcernToolboxItem", 
@@ -92,7 +84,7 @@ namespace Company.Workshop8
 					"TechnicalConcern", 
 					"@TechnicalConcernToolboxBitmap;Company.Workshop8.Dsl.dll", 
 					0xff00ff,
-					Index = 7)]
+					Index = 6)]
 	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
 					"@RelationshipToolboxItem;Company.Workshop8.Dsl.dll", 
 					"Company.Workshop8.RelationshipToolboxItem", 
@@ -100,7 +92,23 @@ namespace Company.Workshop8
 					"Relationship", 
 					"@RelationshipToolboxBitmap;Company.Workshop8.Dsl.dll", 
 					0xff00ff,
+					Index = 7)]
+	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
+					"@LegendToolboxItem;Company.Workshop8.Dsl.dll", 
+					"Company.Workshop8.LegendToolboxItem", 
+					"CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS", 
+					"Legend", 
+					"@LegendToolboxBitmap;Company.Workshop8.Dsl.dll", 
+					0xff00ff,
 					Index = 8)]
+	[VSShell::ProvideStaticToolboxItem("Company.Workshop8.Workshop8ToolboxTab",
+					"@SoftwareArchitectureToolboxItem;Company.Workshop8.Dsl.dll", 
+					"Company.Workshop8.SoftwareArchitectureToolboxItem", 
+					"CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS", 
+					"SoftwareArchitecture", 
+					"@SoftwareArchitectureToolboxBitmap;Company.Workshop8.Dsl.dll", 
+					0xff00ff,
+					Index = 9)]
 	[VSShell::ProvideEditorFactory(typeof(Workshop8EditorFactory), 103, TrustLevel = VSShellInterop::__VSEDITORTRUSTLEVEL.ETL_AlwaysTrusted)]
 	[VSShell::ProvideEditorExtension(typeof(Workshop8EditorFactory), "." + Constants.DesignerFileExtension, 50)]
 	[VSShell::ProvideEditorLogicalView(typeof(Workshop8EditorFactory), "{7651A702-06E5-11D1-8EBD-00A0C90F26EA}")] // Designer logical view GUID i.e. VSConstants.LOGVIEWID_Designer
