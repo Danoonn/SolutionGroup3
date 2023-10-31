@@ -7,4 +7,9 @@ The final solution of our code will possibly give an error about the Visual Stud
 4. If the Legend.jpg file cannot be found, the you have to go to your local computer -> users -> username -> source -> repos -> Workshop 8 -> DslPackage -> Resources -> Legend.jpg
 5. When selecting the Legend.jpg, your local path have been created and all the errors relating to the image path have been solved.
 
+Instructions for the DSL diagram
+1. Select the 'Configure the startup projects' next to the start debugging button.
+2. In ths single startup project, change from Dsl to DslPackage and save the change.
+3. Clean the solution, then build the solution.
+4. Start the solution and the program will work. 
  
